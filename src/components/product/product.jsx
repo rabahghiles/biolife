@@ -1,10 +1,9 @@
 import React from 'react';
-import AddBtn1 from '../add-btn/add-btn-1';
-import AddBtn2 from '../add-btn/add-btn-2';
+import {AddBtn1, AddBtn2}  from '../products-btn/products-btn';
 
-const Product = ({product, panier, handleProductAdd, handleProductRemove}) => {
+const Product = ({isInBasket}) => {
     const style = {
-        "backgroundImage": "url('"+product.path+"')",
+        "backgroundImage": "url('https://images.unsplash.com/photo-1518635017498-87f514b751ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80')",
         "backgroundPosition": "center",
         "backgroundSize": "cover",
         "height": "180px",
@@ -14,11 +13,9 @@ const Product = ({product, panier, handleProductAdd, handleProductRemove}) => {
         <div className="gr-product">
             <div className="gr-product-image" style={style}></div>
             <div className="gr-product-infos">
-                <h3 className="gr-product-name">{product.name}</h3>
-                <p className="gr-product-price">{product.price} euros / {product.unity}</p>
-                {   
-                    isInBasket(product, panier, handleProductAdd, handleProductRemove)   
-                }
+                <h3 className="gr-product-name">Banane d'algérie</h3>
+                <p className="gr-product-price">4 euros / Kg</p>
+                {isInBasket?<AddBtn1 />:<AddBtn2 />}
             </div>
         </div>
     )

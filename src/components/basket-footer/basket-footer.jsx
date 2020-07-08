@@ -1,11 +1,7 @@
-import React from 'react';
-import Product from '../product/product';
+import React from 'react'
 
-
-const Footer = ({panier}) => {
-    let total = 0;
-    panier.forEach( product => total = parseFloat(total) + (product.price*product.quantity));
-    return <div className="gr-b-footer">Total à payer : {total.toFixed(2)} euro(s)</div>
+const Footer = () => {
+    return <div className="gr-b-footer">Total à payer : 5 euro(s)</div>
 }
 
 export default Footer;

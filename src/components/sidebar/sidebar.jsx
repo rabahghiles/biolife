@@ -5,7 +5,9 @@ const SideBarre = ({data}) => {
     return (
         <div className="gr-sidebar">
             <nav className="gr-nav">
-                {getLinks(data)}
+                <a href="#" className="gr-nav-link gr-nav-link-actif">Fraises (4)</a>
+                <a href="#" className="gr-nav-link">Bananes (2)</a>
+                <a href="#" className="gr-nav-link">Pommes (7)</a>
             </nav>
         </div>
     )

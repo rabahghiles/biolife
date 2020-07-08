@@ -1,12 +1,15 @@
 import React from 'react';
 import Product from "../product/product";
 
-const Products = ({categories,panier, handleProductAdd, handleProductRemove}) => {
+const Products = () => {
     return (
         <div className="gr-products">
-            {
-                getProduct(categories, panier, handleProductAdd, handleProductRemove)
-            }
+            <Product isInBasket={true} />
+            <Product isInBasket={true} />
+            <Product isInBasket={false} />
+            <Product isInBasket={false} />
+            <Product isInBasket={true} />
+            <Product isInBasket={false} />
         </div>
     );
 }

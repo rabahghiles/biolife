@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Products from './components/products/products';
 import Basket from './components/basket/basket';
 import Check from './components/check/check';
@@ -7,6 +6,9 @@ import About from './components/About/about';
 import Navbar from './components/navbar/navbar';
 import Sidebar from './components/sidebar/sidebar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import './App.css';
+import Product from './components/product/product';
 
 class App extends Component {
 	
@@ -41,7 +43,7 @@ class App extends Component {
 			],
 			categories : [
 				{
-					id: "11DRCVFFF0",
+					id: "oranges",
 					category_name: "oranges",
 					isActive: false,
 					liste: [
@@ -62,7 +64,7 @@ class App extends Component {
 					]
 				},
 				{
-					id: "AZs14451vc",
+					id: "pommes",
 					category_name: "pommes",
 					isActive: false,
 					liste: [
@@ -76,7 +78,7 @@ class App extends Component {
 					]
 				},
 				{
-					id: "Asddc011452",
+					id: "bananes",
 					isActive: true,
 					category_name: "bananes",
 					liste: [
@@ -108,80 +110,19 @@ class App extends Component {
 		}
 	}
 
-	handleFilterByCategory = (id) => {
-		let filtred = [];
-		if (!id){
-			this.state.categories.forEach( category => {
-				category.liste.forEach( product => {
-					filtred.push(product)
-				})
-			})
-		}else {
-			let index = this.state.categories.findIndex( cate => cate.id === id)
-			this.state.categories[index].liste.forEach( product => {
-				filtred.push(product)
-			})
-		}
-		this.setState(filtred);
-	}
-
-	handleProductAdd = (id) => {
-		const panier = [...this.state.panier];
-		let index = panier.findIndex(product => {
-			return product.id === id
-		})
-		if ( index < 0 ) {
-			let mProduct = {};
-			this.state.categories.forEach( category => {
-				category.liste.forEach( product => {
-					if (product.id === id) mProduct = product;
-				})
-			})
-			mProduct.quantity = 1;
-			panier.push(mProduct);
-		}else {
-			panier[index].quantity += 1;
-		}
-		this.setState({panier});
-	}
-
-	handleProductRemove = (id) => {
-		const panier = [...this.state.panier];
-		let index = panier.findIndex(product => product.id === id)
-		if ( index >= 0 ) {
-			if ( panier[index].quantity > 1 ) panier[index].quantity -= 1
-			else panier.splice(index,1)
-			this.setState({panier});
-		}
-	}
-
 	render() {
 		return (
 			<Router>
 				<div className="gr-body">
-						<Navbar nbrArticle={this.state.panier.length} />
-						<Sidebar data={this.state.categories} />
+						<Navbar />
+						<Sidebar />
 						<div className="gr-content">
 							<Switch>
-								<Route exact path="/" render={() => <Products
-									categories={this.state.categories}
-									panier={this.state.panier}
-									handleProductRemove={this.handleProductRemove}
-									handleProductAdd={this.handleProductAdd} />}
-								/>
-								<Route path="/products" render={() => <Products 
-									categories={this.state.categories}
-									panier={this.state.panier}
-									handleProductAdd={this.handleProductAdd} 
-									handleProductRemove={this.handleProductRemove} />} 
-								/>
-								<Route path="/basket" render={() => <Basket
-									panier={this.state.panier} 
-									handleProductAdd={this.handleProductAdd}
-									handleProductRemove={this.handleProductRemove} />} 
-								/>
-								<Route path="/check" component={Check}/>
-								<Route path="/about" component={About}/>
+								<Route exact path="/" component={Products} />
+								<Route path="/products" component={Products} />
+								<Route path="/basket" component={Basket} />
+								<Route path="/check" component={Check} />
+								<Route path="/about" component={About} />
 							</Switch>
 						</div>
 					</div>
