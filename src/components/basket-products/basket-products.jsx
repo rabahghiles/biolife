@@ -1,19 +1,16 @@
 import React from 'react';
 import Product from "../basket-product/basket-product";
+import { useSelector } from 'react-redux';
 
-const Products = () => {
-    
+
+export default () => {
+    const products = useSelector( state => state.basket);
     return <ul className="gr-b-products">
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-            <Product />
-        </ul>
+        {getProducts(products)}
+    </ul>
 }
- 
-export default Products;
+
+
+const getProducts = (products) => {
+    return products.map(  product => <Product key={product.id} product={product} />)
+}

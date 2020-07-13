@@ -71,7 +71,7 @@ const productsReducer = ( state = categories, action) => {
         case "FILTER_BY_KEYWORD":
             return "Filter products by keyword"
         default:
-            return "return all products"
+            return state
     }
 }
 

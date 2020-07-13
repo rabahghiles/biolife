@@ -26,12 +26,23 @@ const panier = [
 ]
 
 const basketReducer = ( state = panier, action) => {
+    const newState = [...state];
+    let index = -1;
     switch (action.type){
-        case "ADD":
-            return state;
+        case "ADD_PRODUCT":
+            index = newState.findIndex( product => product.id === action.payload.id)
+            if ( index > -1) newState[index].quantity++
+            else newState.push({
+                ...action.payload,
+                quantity: 1,
+            })
+            return newState;
 
-        case "REMOVE":
-            return state;
+        case "REMOVE_PRODUCT":
+            index = newState.findIndex(product => product.id === action.payload.id )
+            const product = newState[index];
+            ( product.quantity > 1 )?product.quantity--:newState.splice(index,1);
+            return newState;
 
         default:
             return state

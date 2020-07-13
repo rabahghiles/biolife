@@ -1,7 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToBasket, removeFromBasket } from '../../actions';
 
-const Product = () => {
-    
+export default ({product}) => {
+    const dispatch =  useDispatch();
     const style = {
         height: "50px",
         width: "50px",
@@ -12,19 +14,18 @@ const Product = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
     }
-
     return <li className="gr-b-product">
         <div>
             <div style={style}></div>
         </div>
-        <div>Banane du Brésile</div>
-        <div>0.8 euros / Kg</div>
-        <div>x 4</div>
-        <div>50 euro(s)</div>
+        <div>{product.name}</div>
+        <div>{product.price} euros / {product.unity}</div>
+        <div>x {product.quantity}</div>
+        <div>{getPrice(product.price,product.quantity)} euro(s)</div>
         <div className="gr-b-product-actions">
-            <button className="gr-b-remove">-</button>
-            <span>4</span>
-            <button className="gr-b-add">+</button>
+            <button className="gr-b-remove" onClick={() => dispatch(removeFromBasket(product.id))}>-</button>
+            <span>{product.quantity}</span>
+            <button className="gr-b-add" onClick={() => dispatch(addToBasket(product))}>+</button>
         </div>
     </li>
 }
@@ -32,6 +33,3 @@ const Product = () => {
 const getPrice = (price,quantity) => {
     return (price * quantity).toFixed(2)
 } 
-
- 
-export default Product;

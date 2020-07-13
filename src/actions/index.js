@@ -1,15 +1,15 @@
 // Basket actions
-export const addToBasket = id => {
+export const addToBasket = product => {
     return {
-        type: "ADD",
+        type: "ADD_PRODUCT",
         payload : {
-            id
+            ...product,
         }
     }
 }
 export const removeFromBasket = id => {
     return {
-        type: "REMOVE",
+        type: "REMOVE_PRODUCT",
         payload : {
             id
         }
@@ -20,6 +20,7 @@ export const removeFromBasket = id => {
 export const filterProductsByCategory = id => {}
 export const filterProductsByKeyword = keyword => {}
 
+// User actions
 export const userLoggedIn = (mail, mdp) => {}
 export const userLoggedOut = id => {}
 export const userSignIn = ({user}) => {}

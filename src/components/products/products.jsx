@@ -1,23 +1,14 @@
 import React from 'react';
 import Product from "../product/product";
+import { useSelector } from 'react-redux';
 
-const Products = () => {
-    return (
-        <div className="gr-products">
-            <Product isInBasket={true} />
-            <Product isInBasket={true} />
-            <Product isInBasket={false} />
-            <Product isInBasket={false} />
-            <Product isInBasket={true} />
-            <Product isInBasket={false} />
-        </div>
-    );
+export default () => {
+    const categories = useSelector( state => state.products);
+    return <div className="gr-products">{getProducts(categories)}</div>
 }
 
-const getProduct = (categories,panier,handleProductAdd, handleProductRemove) => {
+const getProducts = (categories) => {
     return categories.map( category => {
-        return category.liste.map( product => <Product key={product.id} handleProductRemove={handleProductRemove} handleProductAdd={handleProductAdd} category={category.category_name} product={product} panier={panier}/>)
+        return category.liste.map( product => <Product key={product.id} product={product} />)
     })
 }
- 
-export default Products;
